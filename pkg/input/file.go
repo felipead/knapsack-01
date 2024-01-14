@@ -25,19 +25,19 @@ func LoadProblemFromFile(filename string) (Problem, error) {
 
 	numItems, err := readLineAsInt(scanner)
 	if err != nil {
-		return Problem{}, fmt.Errorf("unable to read first line as Number of Items %w", err)
+		return Problem{}, fmt.Errorf("unable to read first line as Number of Items: %w", err)
 	}
 
-	capacity, err := readLineAsInt(scanner)
+	capacity, err := readLineAsDecimal(scanner)
 	if err != nil {
-		return Problem{}, fmt.Errorf("unable to read second line as Capacity %w", err)
+		return Problem{}, fmt.Errorf("unable to read second line as Capacity: %w", err)
 	}
 
 	items := make([]model.Item, 0, numItems)
 	for i := 0; i < numItems; i++ {
 		item, err := readLineAsItem(scanner)
 		if err != nil {
-			return Problem{}, fmt.Errorf("unable to read Item #%v %w", i+1, err)
+			return Problem{}, fmt.Errorf("unable to read Item #%v: %w", i+1, err)
 		}
 		items = append(items, *item)
 	}
@@ -60,6 +60,18 @@ func readLineAsInt(scanner *bufio.Scanner) (int, error) {
 	return value, nil
 }
 
+func readLineAsDecimal(scanner *bufio.Scanner) (decimal.Decimal, error) {
+	line, err := readLine(scanner)
+	if err != nil {
+		return decimal.Zero, err
+	}
+	value, err := decimal.NewFromString(line)
+	if err != nil {
+		return decimal.Zero, err
+	}
+	return value, nil
+}
+
 func readLineAsItem(scanner *bufio.Scanner) (*model.Item, error) {
 	line, err := readLine(scanner)
 	if err != nil {
@@ -74,11 +86,11 @@ func readLineAsItem(scanner *bufio.Scanner) (*model.Item, error) {
 	item := model.Item{}
 	item.Value, err = decimal.NewFromString(fields[0])
 	if err != nil {
-		return nil, fmt.Errorf("failed to parse Value field %w", err)
+		return nil, fmt.Errorf("failed to parse Value field: %w", err)
 	}
 	item.Cost, err = decimal.NewFromString(fields[1])
 	if err != nil {
-		return nil, fmt.Errorf("failed to parse Cost field %w", err)
+		return nil, fmt.Errorf("failed to parse Cost field: %w", err)
 	}
 
 	return &item, nil
@@ -86,10 +98,10 @@ func readLineAsItem(scanner *bufio.Scanner) (*model.Item, error) {
 
 func readLine(scanner *bufio.Scanner) (string, error) {
 	if !scanner.Scan() {
-		if scanner.Err() != nil {
+		if scanner.Err() == nil {
 			return "", errors.New("file stream ended with EOF")
 		}
-		return "", fmt.Errorf("file stream ended with %w", scanner.Err())
+		return "", fmt.Errorf("file stream ended with: %w", scanner.Err())
 	}
 	return scanner.Text(), nil
 }
