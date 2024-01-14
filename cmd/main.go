@@ -1,4 +1,4 @@
-package cmd
+package main
 
 import (
 	"github.com/felipead/knapsack-01/pkg/strategies"
@@ -8,7 +8,7 @@ import (
 	"github.com/felipead/knapsack-01/pkg/model"
 )
 
-func Main() {
+func main() {
 	// TODO: read problem file and strategy from command-line, instead of hardcoding
 
 	problem, err := input.LoadProblemFromFile("examples/dataset1.knapsack")
