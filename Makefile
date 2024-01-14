@@ -1,6 +1,6 @@
 .PHONY: build
 build:
-	@echo "not ready yet"
+	@go build -o bin/knapsack-01 cmd/main.go
 
 .PHONY: clean
 clean:
