@@ -14,7 +14,7 @@ import (
 	"github.com/felipead/knapsack-01/pkg/model"
 )
 
-func LoadProblemFromFile(filename string) (Problem, error) {
+func LoadProblemFromFile(filename string) (*Problem, error) {
 	file, err := os.Open(filename)
 	if err != nil {
 		log.Fatal(err)
@@ -25,24 +25,24 @@ func LoadProblemFromFile(filename string) (Problem, error) {
 
 	numItems, err := readLineAsInt(scanner)
 	if err != nil {
-		return Problem{}, fmt.Errorf("unable to read first line as Number of Items: %w", err)
+		return nil, fmt.Errorf("unable to read first line as Number of Items: %w", err)
 	}
 
 	capacity, err := readLineAsDecimal(scanner)
 	if err != nil {
-		return Problem{}, fmt.Errorf("unable to read second line as Capacity: %w", err)
+		return nil, fmt.Errorf("unable to read second line as Capacity: %w", err)
 	}
 
 	items := make([]model.Item, 0, numItems)
 	for i := 0; i < numItems; i++ {
 		item, err := readLineAsItem(scanner)
 		if err != nil {
-			return Problem{}, fmt.Errorf("unable to read Item #%v: %w", i+1, err)
+			return nil, fmt.Errorf("unable to read Item #%v: %w", i+1, err)
 		}
 		items = append(items, *item)
 	}
 
-	return Problem{
+	return &Problem{
 		Capacity: capacity,
 		Items:    items,
 	}, nil
