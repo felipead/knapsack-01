@@ -62,8 +62,8 @@ func TestShouldFailToLoadProblemInputFromInvalidFiles(t *testing.T) {
 	_, err = LoadProblemFromFile("./testdata/problem_invalid_item_cost.knapsack")
 	assert.ErrorContains(t, err, "unable to read Item #11: failed to parse Cost field")
 
-	_, err = LoadProblemFromFile("./testdata/problem_invalid_item_cost.knapsack")
-	assert.ErrorContains(t, err, "unable to read Item #11: failed to parse Cost field")
+	_, err = LoadProblemFromFile("./testdata/problem_invalid_item_line.knapsack")
+	assert.ErrorContains(t, err, "unable to read Item #11: line was expected to have 2 fields, got 4")
 
 	_, err = LoadProblemFromFile("./testdata/problem_fewer_items_than_declared.knapsack")
 	assert.ErrorContains(t, err, "unable to read Item #21: file stream ended with EOF")
