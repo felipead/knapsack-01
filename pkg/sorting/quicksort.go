@@ -6,7 +6,8 @@ package sorting
 // scheme because it does three times fewer swaps on average. Also, the implementation given creates a balanced
 // partition even when all values are equal, which Lomuto's scheme does not. Like Lomuto's partition scheme,
 // Hoare's partitioning also would cause Quicksort to degrade to O(n²) for already sorted input, if the pivot was
-// chosen as the first or the last element.
+// chosen as the first or the last element. With the middle element as the pivot, however, sorted data results with
+// (almost) no swaps in equally sized partitions leading to best case behavior of Quicksort, i.e. O(n × log(n)).
 //
 //   - Best case time complexity: O(n × log n)
 //   - Worst case time complexity: O(n²)
@@ -27,7 +28,14 @@ func quicksort[T any](array []T, lo, hi int, compare func(a, b T) int) {
 }
 
 func partition[T any](array []T, lo, hi int, compare func(a, b T) int) int {
-	// Choose the first element as the pivot
+	// Choose the first element as the pivot. This will make the algorithm deteriorate
+	// to O(n²) performance if the input is already sorted.
+	//
+	// This can be prevented by selecting the middle element as follows:
+	//
+	//   pivot := array[lo+(hi-lo)/2]
+	//
+	// at the cost of more complex arithmetic.
 	pivot := array[lo]
 
 	// Left index
