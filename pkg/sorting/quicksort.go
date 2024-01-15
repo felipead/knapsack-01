@@ -7,11 +7,11 @@ package sorting
 // partition even when all values are equal, which Lomuto's scheme does not. Like Lomuto's partition scheme,
 // Hoare's partitioning also would cause Quicksort to degrade to O(n²) for already sorted input, if the pivot was
 // chosen as the first or the last element. With the middle element as the pivot, however, sorted data results with
-// (almost) no swaps in equally sized partitions leading to best case behavior of Quicksort, i.e. O(n × log(n)).
+// (almost) no swaps in equally sized partitions leading to best case behavior of Quicksort, i.e. O(n log(n)).
 //
-//   - Best case time complexity: O(n × log n)
+//   - Best case time complexity: O(n log n)
 //   - Worst case time complexity: O(n²)
-//   - Average performance: O(n × log n)
+//   - Average performance: O(n log n)
 //   - Space complexity: O(log n) — it must store a constant amount of information for each nested recursive call
 //
 // Source → https://en.wikipedia.org/wiki/Quicksort

@@ -7,7 +7,17 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestQuicksort_IntegerArrays(t *testing.T) {
+func CompareInt(a, b int) int {
+	if a > b {
+		return +1
+	}
+	if a == b {
+		return 0
+	}
+	return -1
+}
+
+func TestInsertionSort_IntegerArrays(t *testing.T) {
 	t.Parallel()
 
 	compareInt := func(a, b int) int {
@@ -1154,13 +1164,13 @@ func TestQuicksort_IntegerArrays(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			Quicksort[int](tt.array, compareInt)
+			InsertionSort[int](tt.array, compareInt)
 			assert.Equal(t, tt.expected, tt.array)
 		})
 	}
 }
 
-func TestQuicksort_StringArrays(t *testing.T) {
+func TestInsertionSort_StringArrays(t *testing.T) {
 	t.Parallel()
 
 	type testCase struct {
@@ -1242,7 +1252,7 @@ func TestQuicksort_StringArrays(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			Quicksort[string](tt.array, strings.Compare)
+			InsertionSort[string](tt.array, strings.Compare)
 			assert.Equal(t, tt.expected, tt.array)
 		})
 	}
