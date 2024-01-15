@@ -23,21 +23,22 @@ func LoadProblemFromFile(filename string) (*Problem, error) {
 
 	scanner := bufio.NewScanner(file)
 
-	numItems, err := readLineAsInt(scanner)
+	numItems, err := readInt(scanner)
 	if err != nil {
 		return nil, fmt.Errorf("unable to read first line as Number of Items: %w", err)
 	}
 
-	capacity, err := readLineAsDecimal(scanner)
+	capacity, err := readDecimal(scanner)
 	if err != nil {
 		return nil, fmt.Errorf("unable to read second line as Capacity: %w", err)
 	}
 
 	items := make([]model.Item, 0, numItems)
 	for i := 0; i < numItems; i++ {
-		item, err := readLineAsItem(scanner)
+		index := i + 1
+		item, err := readItem(scanner, index)
 		if err != nil {
-			return nil, fmt.Errorf("unable to read Item #%v: %w", i+1, err)
+			return nil, fmt.Errorf("unable to read Item #%v: %w", index, err)
 		}
 		items = append(items, *item)
 	}
@@ -48,7 +49,7 @@ func LoadProblemFromFile(filename string) (*Problem, error) {
 	}, nil
 }
 
-func readLineAsInt(scanner *bufio.Scanner) (int, error) {
+func readInt(scanner *bufio.Scanner) (int, error) {
 	line, err := readLine(scanner)
 	if err != nil {
 		return 0, err
@@ -60,7 +61,7 @@ func readLineAsInt(scanner *bufio.Scanner) (int, error) {
 	return value, nil
 }
 
-func readLineAsDecimal(scanner *bufio.Scanner) (decimal.Decimal, error) {
+func readDecimal(scanner *bufio.Scanner) (decimal.Decimal, error) {
 	line, err := readLine(scanner)
 	if err != nil {
 		return decimal.Zero, err
@@ -72,7 +73,7 @@ func readLineAsDecimal(scanner *bufio.Scanner) (decimal.Decimal, error) {
 	return value, nil
 }
 
-func readLineAsItem(scanner *bufio.Scanner) (*model.Item, error) {
+func readItem(scanner *bufio.Scanner, index int) (*model.Item, error) {
 	line, err := readLine(scanner)
 	if err != nil {
 		return nil, err
@@ -83,7 +84,9 @@ func readLineAsItem(scanner *bufio.Scanner) (*model.Item, error) {
 		return nil, fmt.Errorf("line was expected to have 2 fields, got %v", len(fields))
 	}
 
-	item := model.Item{}
+	item := model.Item{
+		Index: index,
+	}
 	item.Value, err = decimal.NewFromString(fields[0])
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse Value field: %w", err)

@@ -12,21 +12,27 @@ func TestShouldLoadSmallProblemInputFromFile(t *testing.T) {
 	assert.Equal(t, len(problem.Items), 20)
 	assert.Equal(t, problem.Capacity.String(), "2.5")
 
+	assert.Equal(t, problem.Items[0].Index, 1)
 	assert.Equal(t, problem.Items[0].Value.String(), "0.703562")
 	assert.Equal(t, problem.Items[0].Cost.String(), "0.751231")
 
+	assert.Equal(t, problem.Items[1].Index, 2)
 	assert.Equal(t, problem.Items[1].Value.String(), "0.658012")
 	assert.Equal(t, problem.Items[1].Cost.String(), "0.0562173")
 
+	assert.Equal(t, problem.Items[12].Index, 13)
 	assert.Equal(t, problem.Items[12].Value.String(), "0.530008")
 	assert.Equal(t, problem.Items[12].Cost.String(), "0.556193")
 
+	assert.Equal(t, problem.Items[13].Index, 14)
 	assert.Equal(t, problem.Items[13].Value.String(), "0.180224")
 	assert.Equal(t, problem.Items[13].Cost.String(), "0.507427")
 
+	assert.Equal(t, problem.Items[18].Index, 19)
 	assert.Equal(t, problem.Items[18].Value.String(), "0.0189656")
 	assert.Equal(t, problem.Items[18].Cost.String(), "0.5895")
 
+	assert.Equal(t, problem.Items[19].Index, 20)
 	assert.Equal(t, problem.Items[19].Value.String(), "0.725904")
 	assert.Equal(t, problem.Items[19].Cost.String(), "0.320655")
 }
@@ -37,9 +43,11 @@ func TestShouldLoadLargeProblemInputFromFile(t *testing.T) {
 	assert.Equal(t, len(problem.Items), 10000)
 	assert.Equal(t, problem.Capacity.String(), "1250")
 
+	assert.Equal(t, problem.Items[0].Index, 1)
 	assert.Equal(t, problem.Items[0].Value.String(), "0.690495")
 	assert.Equal(t, problem.Items[0].Cost.String(), "0.0187375")
 
+	assert.Equal(t, problem.Items[9999].Index, 10000)
 	assert.Equal(t, problem.Items[9999].Value.String(), "0.0952599")
 	assert.Equal(t, problem.Items[9999].Cost.String(), "0.521027")
 }
