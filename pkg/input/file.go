@@ -14,7 +14,7 @@ import (
 	"github.com/felipead/knapsack-01/pkg/model"
 )
 
-func LoadProblemFromFile(filename string) (*Problem, error) {
+func LoadProblemFromFile(filename string) (*model.Problem, error) {
 	file, err := os.Open(filename)
 	if err != nil {
 		log.Fatal(err)
@@ -43,7 +43,7 @@ func LoadProblemFromFile(filename string) (*Problem, error) {
 		items = append(items, *item)
 	}
 
-	return &Problem{
+	return &model.Problem{
 		Capacity: capacity,
 		Items:    items,
 	}, nil

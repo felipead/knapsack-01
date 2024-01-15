@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestShouldLoadSmallProblemInputFromFile(t *testing.T) {
+func TestLoadProblemFromFile_SmallInput(t *testing.T) {
 	problem, err := LoadProblemFromFile("./testdata/problem_small.knapsack")
 	assert.NoError(t, err)
 	assert.Equal(t, len(problem.Items), 20)
@@ -37,7 +37,7 @@ func TestShouldLoadSmallProblemInputFromFile(t *testing.T) {
 	assert.Equal(t, problem.Items[19].Cost.String(), "0.320655")
 }
 
-func TestShouldLoadLargeProblemInputFromFile(t *testing.T) {
+func TestLoadProblemFromFile_LargeInput(t *testing.T) {
 	problem, err := LoadProblemFromFile("./testdata/problem_large.knapsack")
 	assert.NoError(t, err)
 	assert.Equal(t, len(problem.Items), 10000)
@@ -52,7 +52,7 @@ func TestShouldLoadLargeProblemInputFromFile(t *testing.T) {
 	assert.Equal(t, problem.Items[9999].Cost.String(), "0.521027")
 }
 
-func TestShouldFailToLoadProblemInputFromInvalidFiles(t *testing.T) {
+func TestLoadProblemFromFile_InvalidInputs(t *testing.T) {
 	var err error
 
 	_, err = LoadProblemFromFile("./testdata/problem_empty.knapsack")

@@ -4,7 +4,6 @@ import (
 	"log"
 
 	"github.com/felipead/knapsack-01/pkg/input"
-	"github.com/felipead/knapsack-01/pkg/model"
 	"github.com/felipead/knapsack-01/pkg/strategies"
 )
 
@@ -16,8 +15,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	knapsack := model.NewKnapsack(problem.Capacity)
-	err = knapsack.Solve(strategies.Greedy, problem.Items)
+	knapsack, err := problem.Solve(strategies.Greedy)
 	if err != nil {
 		log.Fatal(err)
 	}

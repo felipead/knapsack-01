@@ -17,7 +17,7 @@ func CompareInt(a, b int) int {
 	return -1
 }
 
-func TestQuickSortIntegerArrays(t *testing.T) {
+func TestQuicksort_IntegerArrays(t *testing.T) {
 	t.Parallel()
 
 	type testCase struct {
@@ -1160,7 +1160,7 @@ func TestQuickSortIntegerArrays(t *testing.T) {
 	}
 }
 
-func TestQuickSortStringArrays(t *testing.T) {
+func TestQuicksort_StringArrays(t *testing.T) {
 	t.Parallel()
 
 	type testCase struct {
