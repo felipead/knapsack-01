@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/felipead/knapsack-01/pkg/strategies"
 	"log"
 
 	"github.com/felipead/knapsack-01/pkg/input"
 	"github.com/felipead/knapsack-01/pkg/model"
+	"github.com/felipead/knapsack-01/pkg/strategies"
 )
 
 func main() {
