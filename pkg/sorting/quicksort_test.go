@@ -105,7 +105,7 @@ func TestQuickSortIntegerArrays(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			QuickSort[int](tt.array, CompareInt)
+			Quicksort[int](tt.array, CompareInt)
 			assert.Equal(t, tt.expected, tt.array)
 		})
 	}
@@ -170,7 +170,7 @@ func TestQuickSortStringArrays(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			QuickSort[string](tt.array, strings.Compare)
+			Quicksort[string](tt.array, strings.Compare)
 			assert.Equal(t, tt.expected, tt.array)
 		})
 	}

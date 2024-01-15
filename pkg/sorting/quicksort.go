@@ -1,9 +1,20 @@
 package sorting
 
-// QuickSort is an in-place, popular sorting algorithm. This implementation uses the Hoare partition scheme.
+// Quicksort is an efficient, general-purpose sorting algorithm. The algorithm sorts in-place, and is not stable.
 //
-// → https://en.wikipedia.org/wiki/Quicksort
-func QuickSort[T any](array []T, compare func(a, b T) int) {
+// This implementation uses the Hoare partition scheme. Hoare's scheme is more efficient than Lomuto's partition
+// scheme because it does three times fewer swaps on average. Also, the implementation given creates a balanced
+// partition even when all values are equal, which Lomuto's scheme does not. Like Lomuto's partition scheme,
+// Hoare's partitioning also would cause Quicksort to degrade to O(n²) for already sorted input, if the pivot was
+// chosen as the first or the last element.
+//
+//   - Best case time complexity: O(n × log n)
+//   - Worst case time complexity: O(n²)
+//   - Average performance: O(n × log n)
+//   - Space complexity: O(log n) — it must store a constant amount of information for each nested recursive call
+//
+// Source → https://en.wikipedia.org/wiki/Quicksort
+func Quicksort[T any](array []T, compare func(a, b T) int) {
 	quicksort(array, 0, len(array)-1, compare)
 }
 
